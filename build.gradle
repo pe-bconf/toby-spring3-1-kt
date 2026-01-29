@@ -1,0 +1,56 @@
+plugins {
+    id 'java'
+    id 'org.jetbrains.kotlin.jvm' version '2.1.0'
+}
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_23
+    targetCompatibility = JavaVersion.VERSION_23
+}
+
+group = 'toby.spring.kt'
+version = '1.0-SNAPSHOT'
+
+ext {
+    volName = 'Vol1-31'
+    targetPath = volName + '/Ch1/1.6.4/'
+    libsPath = volName + '/lib'
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation fileTree(dir: libsPath, include: ['*.jar'])
+
+    implementation 'org.jetbrains.kotlin:kotlin-stdlib'
+    implementation "org.junit.jupiter:junit-jupiter-api:5.14.2"
+    implementation "com.mysql:mysql-connector-j:9.5.0"
+
+    testImplementation "org.testcontainers:testcontainers:1.21.4"
+    testImplementation "org.testcontainers:junit-jupiter:1.21.4"
+
+    testImplementation "org.testcontainers:mysql:1.21.4"
+}
+
+sourceSets {
+    main {
+        kotlin {
+            srcDirs = [targetPath + 'src/main/kotlin']
+        }
+        resources {
+            srcDirs = [targetPath + 'src/main/resources']
+        }
+    }
+
+    test {
+        kotlin {
+            srcDirs = [targetPath + 'src/test/kotlin']
+        }
+        resources {
+            srcDirs = [targetPath + 'src/test/resources']
+        }
+    }
+}
+
