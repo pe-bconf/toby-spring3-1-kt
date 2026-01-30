@@ -1,5 +1,9 @@
 package toby.user.dao
 
+import org.junit.jupiter.api.Test
+import org.testcontainers.containers.MySQLContainer
+import org.testcontainers.junit.jupiter.Container
+import org.testcontainers.junit.jupiter.Testcontainers
 import toby.user.domain.User
 import java.sql.Connection
 import java.sql.DriverManager
@@ -18,11 +22,12 @@ class UserDao {
 
     constructor() {}
 
-    fun getConnection(): Connection =
-         DriverManager.getConnection(JDBC_URL, dbUser, dbPassword)
-
-    fun addUser(user: User) {
+    fun getConnection(): Connection {
         Class.forName(dbDriverName)
+        return DriverManager.getConnection(jdbcUrl, dbUser, dbPassword)
+    }
+
+    fun add(user: User) {
         val c = getConnection()
 
         val ps = c.prepareStatement("insert into users(id, name, password) values (?, ?, ?)")
@@ -35,8 +40,7 @@ class UserDao {
         c.close()
     }
 
-    fun getUser(id: String): User? {
-        Class.forName(dbDriverName)
+    fun get(id: String): User {
         val c = getConnection()
 
         val ps = c.prepareStatement("select id, name, password from users where id = ?")
@@ -48,6 +52,10 @@ class UserDao {
         user.id = rs.getString("id")
         user.name = rs.getString("name")
         user.password = rs.getString("password")
+
+        rs.close()
+        ps.close()
+        c.close()
 
         return user
     }

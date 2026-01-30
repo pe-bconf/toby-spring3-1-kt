@@ -1,6 +1,6 @@
 package toby.account
 
-import toby.service.connect.ConnectionMaker
+import toby.user.dao.ConnectionMaker
 import toby.user.domain.User
 
 class AccountDao {
@@ -10,7 +10,7 @@ class AccountDao {
         this.connectionMaker = connectionMaker
     }
 
-    fun addAccount(user: User) {
+    fun add(user: User) {
         val c = connectionMaker.makeConnection()
 
         val ps = c.prepareStatement("insert into users(id, name, password) values (?, ?, ?)")
@@ -23,7 +23,7 @@ class AccountDao {
         c.close()
     }
 
-    fun getAccount(id: String): User? {
+    fun get(id: String): User? {
         val c = connectionMaker.makeConnection()
 
         val ps = c.prepareStatement("select id, name, password from users where id = ?")

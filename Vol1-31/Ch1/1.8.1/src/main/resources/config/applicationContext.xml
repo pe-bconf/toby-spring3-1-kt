@@ -3,8 +3,8 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans
         http://www.springframework.org/schema/beans/spring-beans-3.0.xsd"
 >
-    <bean id="connectionMaker" class="toby.spring.connect.DConnectionMaker" />
-    <bean id="userDao" class="toby.spring.dao.UserDao">
+    <bean id="connectionMaker" class="toby.spring.user.dao.DConnectionMaker" />
+    <bean id="userDao" class="toby.spring.user.dao.UserDao">
         <property name="connectionMaker" ref="connectionMaker" />
     </bean>
 </beans>

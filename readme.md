@@ -20,7 +20,9 @@
         - Testcontainers 사용을 위해 모든 실행 동작은 TestRunner를 통하도록 변경
     - 샘플 일부 추가
         - Vol1    
-          | 1.7.4, 1.7.5, 1.8.1, 1.8.3
+          > 1.7.4, 1.7.5, 1.8.1, 1.8.3  
+          2.2.1 
+        
     - 일부 내용 임의 작성
         - Vol1  
           | 1.6.4 - 3.1에 없는 단원이나 싱글톤 샘플 추가
@@ -36,6 +38,8 @@
       }
       ```
     - 실행 동작 관련 내용은 src/test/kotlin에 등록하여 사용
+    - JDK 17+ 이상 부터 java.base 모듈이 자신을 사용자 프로젝트에 열어주지 않아 발생하는 ```InaccessibleObjectException``` 처리를 위해 VM Options 추가하여 실행
+      - ``` --add-opens java.base/java.lang=ALL-UNNAMED ```
 
 ##### 기존내용 - 마크다운으로만 수정
 ---

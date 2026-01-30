@@ -1,6 +1,6 @@
 package toby.message
 
-import toby.service.connect.ConnectionMaker
+import toby.user.dao.ConnectionMaker
 import toby.user.domain.User
 
 class MessageDao {
@@ -10,7 +10,7 @@ class MessageDao {
         this.connectionMaker = connectionMaker
     }
 
-    fun addMessage(user: User) {
+    fun add(user: User) {
         val c = connectionMaker.makeConnection()
 
         val ps = c.prepareStatement("insert into users(id, name, password) values (?, ?, ?)")
@@ -23,7 +23,7 @@ class MessageDao {
         c.close()
     }
 
-    fun getMessage(id: String): User? {
+    fun get(id: String): User? {
         val c = connectionMaker.makeConnection()
 
         val ps = c.prepareStatement("select id, name, password from users where id = ?")

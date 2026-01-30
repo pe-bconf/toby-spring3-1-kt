@@ -2,24 +2,11 @@ package toby.user.dao
 
 import toby.user.domain.User
 import java.sql.Connection
-import java.sql.DriverManager
-
-var JDBC_URL: String = ""
-    get() = field
-    set(jdbcUrl) {
-        field = jdbcUrl
-    }
 
 abstract class UserDao {
-    val dbName = "testdb"
-    val dbUser = "user"
-    val dbPassword = "pass"
-
-    constructor() {}
-
     protected abstract fun getConnection(): Connection
 
-    fun addUser(user: User) {
+    fun add(user: User) {
         val c = getConnection()
 
         val ps = c.prepareStatement("insert into users(id, name, password) values (?, ?, ?)")
@@ -32,7 +19,7 @@ abstract class UserDao {
         c.close()
     }
 
-    fun getUser(id: String): User? {
+    fun get(id: String): User {
         val c = getConnection()
 
         val ps = c.prepareStatement("select id, name, password from users where id = ?")
@@ -44,6 +31,10 @@ abstract class UserDao {
         user.id = rs.getString("id")
         user.name = rs.getString("name")
         user.password = rs.getString("password")
+
+        rs.close()
+        ps.close()
+        c.close()
 
         return user
     }

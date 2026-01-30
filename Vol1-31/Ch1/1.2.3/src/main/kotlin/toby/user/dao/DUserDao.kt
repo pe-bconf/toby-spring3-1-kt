@@ -5,7 +5,7 @@ import java.sql.DriverManager
 
 class DUserDao : UserDao() {
     override fun getConnection(): Connection {
-        Class.forName("com.mysql.cj.jdbc.Driver")
-        return DriverManager.getConnection(JDBC_URL, dbUser, dbPassword)
+        Class.forName(dbDriverName)
+        return DriverManager.getConnection(jdbcUrl, dbUser, dbPassword)
     }
 }

@@ -1,6 +1,7 @@
 plugins {
     id 'java'
     id 'org.jetbrains.kotlin.jvm' version '2.1.0'
+    id 'org.jetbrains.kotlin.plugin.spring' version '2.1.0'
 }
 
 java {
@@ -13,7 +14,7 @@ version = '1.0-SNAPSHOT'
 
 ext {
     volName = 'Vol1-31'
-    targetPath = volName + '/Ch1/1.6.4/'
+    targetPath = volName + '/Ch1/1.8.3/'
     libsPath = volName + '/lib'
 }
 
@@ -28,6 +29,9 @@ dependencies {
     implementation "org.junit.jupiter:junit-jupiter-api:5.14.2"
     implementation "com.mysql:mysql-connector-j:9.5.0"
 
+    testImplementation 'org.slf4j:slf4j-api:2.0.17'
+    testImplementation 'org.slf4j:slf4j-log4j12:2.0.17'
+
     testImplementation "org.testcontainers:testcontainers:1.21.4"
     testImplementation "org.testcontainers:junit-jupiter:1.21.4"
 
@@ -40,7 +44,7 @@ sourceSets {
             srcDirs = [targetPath + 'src/main/kotlin']
         }
         resources {
-            srcDirs = [targetPath + 'src/main/resources']
+            srcDirs = [targetPath, targetPath + 'src/main/resources']
         }
     }
 
@@ -53,4 +57,3 @@ sourceSets {
         }
     }
 }
-
