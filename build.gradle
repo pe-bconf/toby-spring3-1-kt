@@ -2,6 +2,8 @@ plugins {
     id 'java'
     id 'org.jetbrains.kotlin.jvm' version '2.1.0'
     id 'org.jetbrains.kotlin.plugin.spring' version '2.1.0'
+    // hamcrest 중첩 처리용 플러그인
+    id 'com.gradleup.shadow' version '9.3.1'
 }
 
 java {
@@ -14,7 +16,7 @@ version = '1.0-SNAPSHOT'
 
 ext {
     volName = 'Vol1-31'
-    targetPath = volName + '/Ch1/1.8.3/'
+    targetPath = volName + '/Ch2/2.3.3/'
     libsPath = volName + '/lib'
 }
 
@@ -23,11 +25,14 @@ repositories {
 }
 
 dependencies {
-    implementation fileTree(dir: libsPath, include: ['*.jar'])
-
     implementation 'org.jetbrains.kotlin:kotlin-stdlib'
     implementation "org.junit.jupiter:junit-jupiter-api:5.14.2"
     implementation "com.mysql:mysql-connector-j:9.5.0"
+
+    implementation "org.junit.jupiter:junit-jupiter-engine:5.14.2"
+    implementation "org.junit.platform:junit-platform-commons:1.14.2"
+    implementation "org.junit.platform:junit-platform-engine:1.14.2"
+    implementation "org.junit.platform:junit-platform-launcher:1.14.2"
 
     testImplementation 'org.slf4j:slf4j-api:2.0.17'
     testImplementation 'org.slf4j:slf4j-log4j12:2.0.17'
@@ -36,6 +41,8 @@ dependencies {
     testImplementation "org.testcontainers:junit-jupiter:1.21.4"
 
     testImplementation "org.testcontainers:mysql:1.21.4"
+
+    implementation fileTree(dir: libsPath, include: ['*.jar'])
 }
 
 sourceSets {
@@ -55,5 +62,20 @@ sourceSets {
         resources {
             srcDirs = [targetPath + 'src/test/resources']
         }
+    }
+}
+
+tasks.processResources {
+    duplicatesStrategy = DuplicatesStrategy.INCLUDE // 최신 파일 유지, 이전파일 덮어쓰기 처리
+}
+
+
+test {
+    testClassesDirs += sourceSets.main.output.classesDirs
+
+    classpath += sourceSets.main.runtimeClasspath
+
+    filter {
+        includeTestsMatching "*Test"
     }
 }

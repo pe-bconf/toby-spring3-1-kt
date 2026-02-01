@@ -24,7 +24,7 @@ public class UserDaoTest {
 		
 		User user = new User();
 		user.setId("gyumee");
-		user.setName("¹Ú¼ºÃ¶");
+		user.setName("ë°•ì„±ì² ");
 		user.setPassword("springno1");
 
 		dao.add(user);
@@ -41,9 +41,9 @@ public class UserDaoTest {
 		ApplicationContext context = new GenericXmlApplicationContext("applicationContext.xml");
 		
 		UserDao dao = context.getBean("userDao", UserDao.class);
-		User user1 = new User("gyumee", "¹Ú¼ºÃ¶", "springno1");
-		User user2 = new User("leegw700", "ÀÌ±æ¿ø", "springno2");
-		User user3 = new User("bumjin", "¹Ú¹üÁø", "springno3");
+		User user1 = new User("gyumee", "ë°•ì„±ì² ", "springno1");
+		User user2 = new User("leegw700", "ì´ê¸¸ì›", "springno2");
+		User user3 = new User("bumjin", "ë°•ë²”ì§„", "springno3");
 				
 		dao.deleteAll();
 		assertThat(dao.getCount(), is(0));
