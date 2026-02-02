@@ -2,6 +2,7 @@ package toby.spring.user.dao
 
 import org.hamcrest.core.Is.`is`
 import org.junit.Assert.assertThat
+import org.junit.Before
 import org.junit.Test
 
 import org.springframework.context.support.GenericXmlApplicationContext
@@ -16,58 +17,55 @@ val dbName = "testdb"
 var jdbcUrl = "jdbc:mysql://localhost:3306/springbook?characterEncoding=UTF-8"
 
 class UserDaoTest {
+    private lateinit var dao: UserDao
+    private lateinit var user1: User
+    private lateinit var user2: User
+    private lateinit var user3: User
+
+    @Before
+    fun setUp() {
+        val ctx = GenericXmlApplicationContext("config/applicationContext.xml")
+        this.dao = ctx.getBean("userDao", UserDao::class.java)
+        this.user1 = User("gyumee", "박성철", "springno1")
+        this.user2 = User("leegw700", "이길원", "springno2")
+        this.user3 = User("bumjin", "박범진", "springno3")
+    }
+
     @Test
     fun addAndGet() {
-        val ctx = GenericXmlApplicationContext("config/applicationContext.xml")
-
-        val dao = ctx.getBean("userDao", UserDao::class.java)
-
-        val user1 = User("gyumee", "박성철", "springno1")
-        val user2 = User("leegw700", "이길원", "springno2")
-
         dao.deleteAll()
         assertThat(dao.getCount(), `is`(0))
 
-        dao.add(user1)
-        dao.add(user2)
+        dao.add(this.user1)
+        dao.add(this.user2)
         assertThat(dao.getCount(), `is`(2))
 
-        val userget1 = dao.get(user1.id)
-        assertThat(userget1?.name, `is`(user1.name))
-        assertThat(userget1?.password, `is`(user1.password))
+        val userget1 = dao.get(this.user1.id)
+        assertThat(userget1?.name, `is`(this.user1.name))
+        assertThat(userget1?.password, `is`(this.user1.password))
 
-        val userget2 = dao.get(user2.id)
-        assertThat(userget2?.name, `is`(user2.name))
-        assertThat(userget2?.password, `is`(user2.password))
+        val userget2 = dao.get(this.user2.id)
+        assertThat(userget2?.name, `is`(this.user2.name))
+        assertThat(userget2?.password, `is`(this.user2.password))
     }
 
     @Test
     fun count() {
-        val ctx = GenericXmlApplicationContext("config/applicationContext.xml")
-        val dao = ctx.getBean("userDao", UserDao::class.java)
-
-        val user1 = User("gyumee", "박성철", "springno1")
-        val user2 = User("leegw700", "이길원", "springno2")
-        val user3 = User("bumjin", "박범진", "springno3")
-
         dao.deleteAll()
         assertThat(dao.getCount(), `is`(0))
 
-        dao.add(user1)
+        dao.add(this.user1)
         assertThat(dao.getCount(), `is`(1))
 
-        dao.add(user2)
+        dao.add(this.user2)
         assertThat(dao.getCount(), `is`(2))
 
-        dao.add(user3)
+        dao.add(this.user3)
         assertThat(dao.getCount(), `is`(3))
     }
 
     @Test(expected = EmptyResultDataAccessException::class)
     fun getUserFailure() {
-        val ctx = GenericXmlApplicationContext("config/applicationContext.xml")
-        val dao = ctx.getBean("userDao", UserDao::class.java)
-
         dao.deleteAll()
         assertThat(dao.getCount(), `is`(0))
 
