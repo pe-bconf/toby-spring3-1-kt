@@ -14,7 +14,7 @@ version = '1.0-SNAPSHOT'
 
 ext {
     volName = 'Vol1-31'
-     targetPath = volName + '/Ch3/3.3.2/'
+    targetPath = volName + '/Ch3/3.4.1/'
     libsPath = volName + '/lib/'
 }
 
