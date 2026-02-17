@@ -112,6 +112,7 @@ class UserDao {
         }
     }
 
+    @Throws(SQLException::class)
     fun deleteAll() {
         this.jdbcContext.executeSql("delete from users")
     }
