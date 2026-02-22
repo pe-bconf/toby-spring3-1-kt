@@ -12,7 +12,7 @@ class UserService {
         this.userDao = userDao
     }
 
-    fun updateLevels() {
+    fun upgradeLevels() {
         val users: List<User> = userDao.getAll()
 
         for (user in users) {

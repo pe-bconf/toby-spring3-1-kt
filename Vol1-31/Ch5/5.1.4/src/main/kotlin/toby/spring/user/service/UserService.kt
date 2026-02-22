@@ -1,6 +1,5 @@
 package toby.spring.user.service
 
-import org.eclipse.core.internal.runtime.PerformanceStatsProcessor.changed
 import toby.spring.user.dao.UserDao
 import toby.spring.user.domain.Level
 import toby.spring.user.domain.User
@@ -12,7 +11,7 @@ class UserService {
         this.userDao = userDao
     }
 
-    fun updateLevels() {
+    fun upgradeLevels() {
         val users: List<User> = userDao.getAll()
 
         for (user in users) {

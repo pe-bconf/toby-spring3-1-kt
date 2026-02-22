@@ -14,7 +14,7 @@ version = '1.0-SNAPSHOT'
 
 ext {
     volName = 'Vol1-31'
-    targetPath = volName + '/Ch5/5.1.4/'
+    targetPath = volName + '/Ch5/5.1.5/'
     libsPath = volName + '/lib/'
 }
 
@@ -49,18 +49,18 @@ sourceSets {
             srcDirs = [targetPath + 'src/main/kotlin']
         }
         resources {
-            srcDirs = [targetPath, targetPath + 'src/main/resources']
+            srcDirs = [targetPath + 'src/main/resources']
         }
     }
 
-    test {
+/*    test {
         kotlin {
             srcDirs = [targetPath + 'src/test/kotlin']
         }
         resources {
             srcDirs = [targetPath + 'src/test/resources']
         }
-    }
+    }*/
 }
 
 tasks.processResources {

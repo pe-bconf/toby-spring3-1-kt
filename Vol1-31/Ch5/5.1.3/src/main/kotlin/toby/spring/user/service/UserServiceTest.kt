@@ -43,7 +43,7 @@ class UserServiceTest {
             userDao.add(user)
         }
 
-        userService.updateLevels()
+        userService.upgradeLevels()
 
         checkLevel(users.get(0), Level.BASIC)
         checkLevel(users.get(1), Level.SILVER)

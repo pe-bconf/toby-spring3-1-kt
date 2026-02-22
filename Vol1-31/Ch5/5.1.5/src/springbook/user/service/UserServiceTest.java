@@ -31,11 +31,11 @@ public class UserServiceTest {
 	@Before
 	public void setUp() {
 		users = Arrays.asList(
-				new User("bumjin", "π⁄π¸¡¯", "p1", Level.BASIC, MIN_LOGCOUNT_FOR_SILVER-1, 0),
-				new User("joytouch", "∞≠∏Ìº∫", "p2", Level.BASIC, MIN_LOGCOUNT_FOR_SILVER, 0),
-				new User("erwins", "Ω≈Ω¬«—", "p3", Level.SILVER, 60, MIN_RECCOMEND_FOR_GOLD-1),
-				new User("madnite1", "¿ÃªÛ»£", "p4", Level.SILVER, 60, MIN_RECCOMEND_FOR_GOLD),
-				new User("green", "ø¿πŒ±‘", "p5", Level.GOLD, 100, Integer.MAX_VALUE)
+				new User("bumjin", "Î∞ïÎ≤îÏßÑ", "p1", Level.BASIC, MIN_LOGCOUNT_FOR_SILVER-1, 0),
+				new User("joytouch", "Í∞ïÎ™ÖÏÑ±", "p2", Level.BASIC, MIN_LOGCOUNT_FOR_SILVER, 0),
+				new User("erwins", "Ïã†ÏäπÌïú", "p3", Level.SILVER, 60, MIN_RECCOMEND_FOR_GOLD-1),
+				new User("madnite1", "Ïù¥ÏÉÅÌò∏", "p4", Level.SILVER, 60, MIN_RECCOMEND_FOR_GOLD),
+				new User("green", "Ïò§ÎØºÍ∑ú", "p5", Level.GOLD, 100, Integer.MAX_VALUE)
 				);
 	}
 
@@ -67,7 +67,7 @@ public class UserServiceTest {
 	public void add() {
 		userDao.deleteAll();
 		
-		User userWithLevel = users.get(4);	  // GOLD ∑π∫ß  
+		User userWithLevel = users.get(4);	  // GOLD Î†àÎ≤®  
 		User userWithoutLevel = users.get(0);  
 		userWithoutLevel.setLevel(null);
 		
