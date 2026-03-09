@@ -10,11 +10,11 @@ java {
 }
 
 group = 'toby.spring.kt'
-version = '1.0-SNAPSHOT'
+version = '0.1-SNAPSHOT'
 
 ext {
     volName = 'Vol1-31'
-    targetPath = volName + '/Ch5/5.4.4/'
+    targetPath = volName + '/Ch6/6.1.1/'
     libsPath = volName + '/lib/'
 }
 
