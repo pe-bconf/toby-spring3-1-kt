@@ -14,7 +14,7 @@ version = '0.1-SNAPSHOT'
 
 ext {
     volName = 'Vol1-31'
-    targetPath = volName + '/Ch6/6.2.2/'
+    targetPath = volName + '/Ch6/6.2.4/'
     libsPath = volName + '/lib/'
 }
 
@@ -41,6 +41,10 @@ dependencies {
     testImplementation "org.testcontainers:junit-jupiter:1.21.4"
 
     testImplementation "org.testcontainers:mysql:1.21.4"
+
+    testImplementation 'org.mockito:mockito-core:4.3.1'
+    testImplementation 'org.mockito:mockito-junit-jupiter:4.3.1'
+    testImplementation "org.mockito.kotlin:mockito-kotlin:4.1.0"
 }
 
 sourceSets {
@@ -67,7 +71,7 @@ tasks.processResources {
     duplicatesStrategy = DuplicatesStrategy.INCLUDE // 최신 파일 유지, 이전파일 덮어쓰기 처리
 }
 
-test {
+/*test {
     testClassesDirs += sourceSets.main.output.classesDirs
 
     classpath += sourceSets.main.runtimeClasspath
@@ -75,4 +79,4 @@ test {
     filter {
         includeTestsMatching "*Test"
     }
-}
+}*/
