@@ -33,6 +33,12 @@
           2.4.1 - 테스트용 context 파일 추가, 스프링 테스트 애플리케이션 컨텍스트 없이 테스트 추가
           3.5.2 - add() 내용 적용하여 JdbcContext 내 클라이언트 함수 형태 변경                                   
           5.1.1 - table user alter 스크립트 추가
+          6.2.4 - 기존 mockito lib와 코틀린 호환성 문제로 기존 라이브러리 확장자 변경으로 인식 제외
+           - 실행 시 발생하는 Unable to make protected final java.lang.Class .. 예외로 인해 jvm 파라미터 추가 후 실행 --add-opens java.base/java.lang=ALL-UNNAMED
+             - jdk 이후 변경 전까지 유지
+           - 코틀린 관련 mockito 라이브러리 추가
+           - 의존성 정보 가능한한 maven repos 의존하도록 변경
+
 2. 실행환경
     - 이 프로젝트는 IntelliJ로 작성됨
     - Kotlin2.1, JDK23, Gradle9, MySQL8.0

@@ -1,28 +1,23 @@
 package toby.spring.user.dao
 
-import org.hamcrest.core.Is.`is`
+import org.hamcrest.CoreMatchers.instanceOf
+import org.hamcrest.CoreMatchers.`is`
 import org.junit.After
 import org.junit.Assert.assertThat
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.context.ApplicationContext
 
-import org.springframework.context.support.GenericXmlApplicationContext
 import org.springframework.dao.DataAccessException
 import org.springframework.dao.DuplicateKeyException
 import org.springframework.dao.EmptyResultDataAccessException
-import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate
-import org.springframework.jdbc.datasource.SingleConnectionDataSource
 import org.springframework.jdbc.support.SQLErrorCodeSQLExceptionTranslator
 import org.springframework.jdbc.support.SQLExceptionTranslator
-import org.springframework.test.annotation.DirtiesContext
 import org.springframework.test.context.ContextConfiguration
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner
 import toby.spring.user.domain.Level
 import toby.spring.user.domain.User
-import java.sql.PreparedStatement
 import java.sql.SQLException
 import javax.sql.DataSource
 
@@ -55,10 +50,10 @@ class UserDaoTest {
         dao.add(this.user2)
         assertThat(dao.getCount(), `is`(2))
 
-        val userget1 = dao.get(this.user1.id)
+        val userget1 = dao.get(this.user1.id)!!
         checkSameUser(userget1, this.user1)
 
-        val userget2 = dao.get(this.user2.id)
+        val userget2 = dao.get(this.user2.id)!!
         checkSameUser(userget2, this.user2)
     }
 
@@ -147,7 +142,7 @@ class UserDaoTest {
             val sqlEx : SQLException = ex.rootCause as SQLException
             val set : SQLExceptionTranslator = SQLErrorCodeSQLExceptionTranslator(this.dataSource)
 
-            assertThat(set.translate(null, null, sqlEx), `is`(DuplicateKeyException::class.java))
+            assertThat(set.translate(null, null, sqlEx), instanceOf(DuplicateKeyException::class.java))
         }
     }
 
@@ -173,9 +168,9 @@ class UserDaoTest {
         dao.update(user1)
 
         val user1update = dao.get(this.user1.id)
-        checkSameUser(user1, user1update)
+        checkSameUser(user1, user1update!!)
         val user2same = dao.get(this.user2.id)
-        checkSameUser(this.user2, user2same)
+        checkSameUser(this.user2, user2same!!)
     }
 
 }

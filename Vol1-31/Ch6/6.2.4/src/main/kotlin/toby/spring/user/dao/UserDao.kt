@@ -4,7 +4,7 @@ import toby.spring.user.domain.User
 
 interface UserDao {
     fun getCount(): Int
-    fun get(id: String?): User
+    fun get(id: String?): User?
     fun getAll(): List<User>
 
     fun add(user: User): Int

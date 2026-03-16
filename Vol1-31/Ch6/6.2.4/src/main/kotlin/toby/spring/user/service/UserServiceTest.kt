@@ -7,7 +7,11 @@ import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.ArgumentCaptor
-import org.mockito.Mockito.*
+import org.mockito.Mockito.times
+import org.mockito.Mockito.verify
+import org.mockito.Mockito.`when`
+import org.mockito.Mockito.mock
+import org.mockito.kotlin.any
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.mail.MailSender
 import org.springframework.mail.SimpleMailMessage
@@ -87,8 +91,8 @@ class UserServiceTest {
 
         userServiceImpl.upgradeLevels()
 
-        verify(mockUserDao, times(2)).update(any(User::class.java))
-        verify(mockUserDao, times(2)).update(any(User::class.java))
+        verify(mockUserDao, times(2)).update(any<User>())
+        verify(mockUserDao, times(2)).update(any<User>())
         verify(mockUserDao).update(users[1])
         assertThat(users[1].level, `is`(Level.SILVER))
         verify(mockUserDao).update(users[3])
@@ -105,7 +109,7 @@ class UserServiceTest {
 
     private fun checkLevel(user: User, expectedLevel: Level) {
         val userUpdate = userDao.get(user.id)
-        assertThat(userUpdate.level, `is`(expectedLevel))
+        assertThat(userUpdate?.level, `is`(expectedLevel))
     }
 
     private fun checkLevelUpgraded(updated: User, expectedId: String, expectedLevel: Level) {
@@ -127,8 +131,8 @@ class UserServiceTest {
         val userWithLevelRead = userDao.get(userWithLevel.id)
         val userWithoutLevelRead = userDao.get(userWithoutLevel.id)
 
-        assertThat(userWithLevelRead.level, `is`(userWithLevel.level))
-        assertThat(userWithoutLevelRead.level, `is`(Level.BASIC))
+        assertThat(userWithLevelRead?.level, `is`(userWithLevel.level))
+        assertThat(userWithoutLevelRead?.level, `is`(Level.BASIC))
     }
 
     @Test

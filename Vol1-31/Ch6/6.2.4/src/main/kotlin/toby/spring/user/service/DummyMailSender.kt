@@ -4,9 +4,9 @@ import org.springframework.mail.MailSender
 import org.springframework.mail.SimpleMailMessage
 
 class DummyMailSender: MailSender {
-    override fun send(p0: SimpleMailMessage?) {
+    override fun send(simpleMessage: SimpleMailMessage) {
     }
 
-    override fun send(p0: Array<out SimpleMailMessage?>?) {
+    override fun send(vararg simpleMessages: SimpleMailMessage?) {
     }
 }
